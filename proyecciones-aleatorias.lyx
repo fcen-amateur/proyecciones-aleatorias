@@ -1,0 +1,2951 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass beamer
+\begin_preamble
+\usetheme[block=fill]{metropolis}
+%\useinnertheme{metropolis}
+%\useoutertheme{metropolis}
+%\usefonttheme{metropolis}
+%\usecolortheme{metropolis}
+%\usetheme{Darmstadt}
+%\usetheme{Frankfurt}
+% or ...
+
+%\setbeamercovered{transparent}
+\end_preamble
+\use_default_options false
+\begin_modules
+knitr
+\end_modules
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "default" "default"
+\font_math "default" "auto"
+\font_default_family default
+\use_non_tex_fonts true
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 10
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style french
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Algunos macros para matemática
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\H}{\mathbb{H}}
+{\mathbb{H}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Knitr setup para incluir código en R prolijo
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<setup, include=FALSE>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+library(knitr)
+\end_layout
+
+\begin_layout Plain Layout
+
+opts_chunk$set(fig.path='figure/beamer-',fig.align='center',fig.show='hold',size='f
+ootnotesize')
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Title
+Proyecciones en Direcciones Aleatorias
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Proyecciones Aleatorias
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subtitle
+o 
+\begin_inset Quotes eld
+\end_inset
+
+Cómo reducir dimensionalidad sin pensar demasiado
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+Gonzalo Barrera Borla 
+\end_layout
+
+\begin_layout Institute
+Universidad de Buenos Aires
+\end_layout
+
+\begin_layout Date
+Análisis de Datos Funcionales, 2020
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+If you wish to uncover everything in a step-wise fashion, uncomment the
+ following command:
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%
+\backslash
+beamerdefaultoverlayspecification{<+->}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+The following causes the table of contents to be shown at the beginning
+ of every subsection.
+ Delete this, if you do not want it.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%
+\backslash
+AtBeginSubsection[]{%
+\end_layout
+
+\begin_layout Plain Layout
+
+%  
+\backslash
+frame<beamer>{ 
+\end_layout
+
+\begin_layout Plain Layout
+
+%    
+\backslash
+frametitle{Outline}   
+\end_layout
+
+\begin_layout Plain Layout
+
+%   
+\backslash
+tableofcontents[currentsection,currentsubsection] 
+\end_layout
+
+\begin_layout Plain Layout
+
+% }
+\end_layout
+
+\begin_layout Plain Layout
+
+%}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Para imprimir con notas, descomentar:
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%
+\backslash
+setbeamertemplate{note page}[plain]
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+setbeameroption{show notes}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+setbeamertemplate{section in toc}[sections numbered] 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Contenido
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Section
+Motivación
+\end_layout
+
+\begin_layout Subsection
+El problema: caracterizar e.
+ a.
+ 
+\begin_inset Formula $\infty-\text{dimensionales}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+El problema: caracterizar e.
+ a.
+ 
+\begin_inset Formula $\infty-\text{dimensionales}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Caracterizar elementos aleatorias en espacios 
+\begin_inset Formula $\infty$
+\end_inset
+
+-dimensionales implica expresarlos (i.e.
+ proyectarlos) en 
+\emph on
+algún
+\emph default
+ subespacio de 
+\begin_inset Formula $\H$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Itemize
+bases fijas: Fourier, b-splines, ...
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Itemize
+descomposiciones data-dependientes: FPC/KLT, FCC, ...
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Itemize
+o en direcciones aleatorias.
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Standard
+¿Guarda alguna información útil una proyección aleatoria?
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Standard
+Resulta que sí, y bastante.
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Una herramienta más: direcciones aleatorias
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Una herramienta más: direcciones aleatorias
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Sean
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $X,Y$
+\end_inset
+
+ elementos aleatorios (e.
+ a.) en el espacio de Hilbert 
+\begin_inset Formula $\H,\ X\sim P,\ Y\sim Q$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $P\in DM\left(\H\right)$
+\end_inset
+
+, una distribución 
+\emph on
+determinada por sus momentos
+\emph default
+, y
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\mathbb{E}$
+\end_inset
+
+ el cono cerrado 
+\begin_inset Formula $\mathbb{E}\left(X,Y\right)\coloneqq\left\{ \alpha\in\mathbb{H}:\left\langle X,\alpha\right\rangle \sim\left\langle Y,\alpha\right\rangle \right\} $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout ExampleBlock
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Teorema Cuesta - Fraiman - Ransford
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout ExampleBlock
+(Adaptado de 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cuesta 2007"
+literal "false"
+
+\end_inset
+
+) Sea 
+\begin_inset Formula $\mu$
+\end_inset
+
+ una distribución Gaussiana no-degenerada en 
+\begin_inset Formula $\H$
+\end_inset
+
+.
+ Luego, 
+\begin_inset Formula 
+\[
+X\sim Y\iff\mu\left[\mathbb{E}\left(X,Y\right)\right]>0
+\]
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Frame
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Beamer Note
+status open
+
+\begin_layout Plain Layout
+Alguna información siempre van a guardar, la pregunta es qué se puede decir
+ a partir de ella.
+ Resulta que bastante
+\end_layout
+
+\begin_layout Plain Layout
+E el cono determinado por las direcciones alfa en las que las distribuciones
+ marginales de X e Y conciden
+\end_layout
+
+\begin_layout Plain Layout
+Es un resultado bastante fuerte.
+ Eligiendo direcciones 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ al azar según cierta distribución sencilla, si la distribución de las proyeccio
+nes de X e Y en alfa coinciden, casi-seguramente coinciden las distribuciones
+ de X e Y.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Algunas aplicaciones
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Aplicaciones
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Noción de Profundidad
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Profundidad aleatoria
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Profundidad aleatoria proyectada
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Existen distintas nociones de profundad posibles posibles en 
+\begin_inset Formula $\H$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Itemize
+profundidad 
+\emph on
+integrada
+\emph default
+ de Fraiman y Muniz,
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Itemize
+el método de la 
+\emph on
+h-moda
+\emph default
+,
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Itemize
+en direcciones aleatorias.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Profundidad aleatoria proyectada
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Dada una muestra 
+\begin_inset Formula $\mathbf{X}=\left\{ X_{i}\right\} _{i=1}^{n}$
+\end_inset
+
+, sean
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\alpha\in\H$
+\end_inset
+
+ una dirección aleatoria independiente de 
+\begin_inset Formula $\mathbf{X}$
+\end_inset
+
+ y
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\mathbf{x}=\left\{ x_{i}:x_{i}=\left\langle X_{i},\alpha\right\rangle \right\} _{i=1}^{n}$
+\end_inset
+
+ la proyección de cada elemento de 
+\begin_inset Formula $\mathbf{X}$
+\end_inset
+
+ en ella.
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Standard
+La 
+\emph on
+profundidad aleatoria proyectada 
+\emph default
+muestral del dato original 
+\begin_inset Formula $\mathop{RPD}\left(X_{i}\right)$
+\end_inset
+
+ se define como la profundidad unidimensional de 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+, expresada en términos del cuantil 
+\emph on
+aleatorio
+\emph default
+ de 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ en 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout AlertBlock
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+¡Ojo!
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout AlertBlock
+Al ser una medida aleatoria, hay que controlar su variabilidad, típicamente
+ promediando sobre múltiples proyecciones 
+\begin_inset Formula $\left\{ \alpha_{i}\right\} _{i=1}^{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Standard
+Estas medidas de profundidad se pueden usadas como covariables en tareas
+ de regresión 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cuevas 2007"
+literal "false"
+
+\end_inset
+
+ y y clasificación 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cuevas 2007,Cuesta 2017"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Test de hipótesis vía proyecciones:
+\end_layout
+
+\begin_layout Subsubsection
+Bondad de ajuste
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Bondad de ajuste para familias paramétricas
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Consideremos la hipótesis de pertenencia a cierta familia de distribuciones
+ paramétricas
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+H_{0} & :P\in\mathcal{P}\coloneqq\left\{ P\left(\cdot,\theta\right):\theta\in\Theta\right\} \quad\text{vs.}\quad H_{1}:P\notin\mathcal{P}\\
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Standard
+¿Cómo se usaría el teorema de Cuesta-Fraiman-Ransford para construir tests
+ a partir de proyecciones aleatorias?
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Bondad de ajuste para familias paramétricas
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cuesta 2007"
+literal "false"
+
+\end_inset
+
+ considera familias paramétricas
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
++-
+\end_layout
+
+\end_inset
+
+invariantes
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
++-
+\end_layout
+
+\end_inset
+
+por locación (
+\emph on
+l-
+\emph default
+invariantes
+\emph on
+)
+\emph default
+: 
+\begin_inset Formula $X\sim P_{X}\in\mathcal{P},Y=X+m\Rightarrow P_{y}\in\mathcal{P}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+por escala (
+\emph on
+s-
+\emph default
+invariantes
+\emph on
+)
+\emph default
+: 
+\begin_inset Formula $X\sim P_{X}\in\mathcal{P},Y=\Sigma X\Rightarrow P_{y}\in\mathcal{P}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+elípticas (
+\emph on
+l- y s- 
+\emph default
+invariantes)
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\emph on
+ciertas 
+\emph default
+familias no-invariantes, donde
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Formula $\mathcal{P}\coloneqq\left\{ \mathcal{L}\left(sX+g\right):s\in\mathbb{R}\land g\in V_{n}\right\} $
+\end_inset
+
+ y
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $V_{n}$
+\end_inset
+
+ es un subespacio finito-dimensional de 
+\begin_inset Formula $\mathbb{H}$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Standard
+y prueba que familias del tipo
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
++-
+\end_layout
+
+\end_inset
+
+están 
+\emph on
+determinadas en probabilidad
+\emph default
+ (d.
+ p.) por una única proyección aleatoria.
+\end_layout
+
+\begin_layout Enumerate
+con 
+\begin_inset Formula $n$
+\end_inset
+
+ parámetros están d.
+ p.
+ por 
+\begin_inset Formula $k=n+1$
+\end_inset
+
+ proyecciones aleatorias.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Bondad de ajuste para familias paramétricas
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+En cualquier caso, si la familia determinada por 
+\begin_inset Formula $\left\{ h_{i}\right\} _{i=1}^{k}$
+\end_inset
+
+ proyecciones aleatorias 
+\begin_inset Formula $\mu-\text{generadas}$
+\end_inset
+
+, resulta que la 
+\emph on
+hipótesis proyectada
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-15pt}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+H_{0}^{h} & :\left(P_{h_{1}},\ldots,P_{h_{k}}\right)\in\mathcal{P}_{h_{1},\ldots,h_{k}}:=\left\{ \left(P_{h_{1}}(\cdot,\theta),\ldots,P_{h_{k}}(\cdot,\theta)\right):\theta\in\Theta\right\} 
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Standard
+es 
+\begin_inset Formula $\mu^{k}-\text{casi seguramente}$
+\end_inset
+
+(
+\begin_inset Formula $\mu^{k}-c.s.$
+\end_inset
+
+) equivalente a la hipótesis original, ya que 
+\begin_inset Formula $\mu^{k}-c.s.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-15pt}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\left(P_{h_{1}},\ldots,P_{h_{k}}\right)\in\mathcal{P}_{h_{1},\ldots,h_{k}} & \iff P\in\mathcal{P}\\
+H_{0}^{h} & \iff H_{0}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Standard
+Y para alguna medida apropiada de distancia 
+\begin_inset Formula $d$
+\end_inset
+
+ que mida el desvío de 
+\begin_inset Formula $P$
+\end_inset
+
+ c.r.a.
+ 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+ bajo 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+, 
+\begin_inset Formula $\mu^{k}-c.s.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-15pt}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\max_{i=1,\ldots,k}d\left(P_{h_{i}},P_{h_{i}}(\cdot,\theta)\right)=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Bondad de ajuste para familias paramétricas
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Tomando por 
+\begin_inset Formula $d$
+\end_inset
+
+ la distancia Kolmogoro-Smirnov, podemos basar el test en el estadístico
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+D_{n}:=\max_{i=1,\ldots,k}\sqrt{n}d\left(\left(\mathbb{P}_{n}\right)_{h_{i}},P_{h_{i}}(\cdot,\theta)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+i.e.
+ el máximo de 
+\begin_inset Formula $k$
+\end_inset
+
+estadísticos K-S univariados, donde 
+\begin_inset Formula $\mathbb{P}_{n}$
+\end_inset
+
+es la distribución empírica basada en 
+\begin_inset Formula $\left\{ X_{i}\right\} _{i=1}^{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Standard
+Restan dos dificultades:
+\end_layout
+
+\begin_layout Itemize
+Cuando 
+\begin_inset Formula $k=1$
+\end_inset
+
+, el estadístico K-S es de distribución libre, pero para 
+\begin_inset Formula $k>1$
+\end_inset
+
+ ya no.
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Itemize
+Salvo para hipótesis 
+\begin_inset Quotes eld
+\end_inset
+
+simples
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $H_{0}:P_{0}=P\left(\cdot,\theta_{0}\right)$
+\end_inset
+
+, es necesario estimar 
+\begin_inset Formula $\theta$
+\end_inset
+
+ a partir de 
+\begin_inset Formula $\mathbf{X}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Standard
+Así que tendremos que contentarnos con un estimador 
+\begin_inset Formula $\hat{D_{n}}$
+\end_inset
+
+ de 
+\begin_inset Formula $D_{n}$
+\end_inset
+
+.
+ Para aproximar la distribución de 
+\begin_inset Formula $\hat{D_{n}}$
+\end_inset
+
+, sugieren un procedimiento bootstrap y prueban que vale bajo ciertas condicione
+s.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+MLF con respuesta escalar
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+MLF con respuesta escalar
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Garcia 2014,Cuesta 2019"
+literal "false"
+
+\end_inset
+
+ aplican estas ideas al modelo lineal funcional con respuesta escalar
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Y=\left\langle X,\beta\right\rangle +\varepsilon=\int X\left(t\right)\beta\left(t\right)dt+\varepsilon
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+donde 
+\begin_inset Formula $X,\beta\in\H,Y\in\mathbb{R}$
+\end_inset
+
+ y se sostienen los supuestos clásicos sobre 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ detallados en los apuntes de clase.
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Standard
+La predicción de 
+\begin_inset Formula $Y$
+\end_inset
+
+ se hace a partir de la esperanza condicional
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+m\left(X\right)=E\left[Y|X\right]=\left\langle X,\beta\right\rangle 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Standard
+de manera que las siguientes expresiones son equivalentes:
+\end_layout
+
+\begin_layout Itemize
+El MLF representa adecuadamente la relación entre 
+\begin_inset Formula $X$
+\end_inset
+
+ e 
+\begin_inset Formula $Y$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $m\left(X\right)\in\mathcal{M}\coloneqq\left\{ \left\langle \cdot,\beta\right\rangle :\beta\in\H\right\} $
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+MLF con respuesta escalar
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+A partir de aquí, se pueden utilizar las técnicas antes mencionadas para
+ construir tests
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
++-
+\end_layout
+
+\end_inset
+
+para hipótesis simples : 
+\begin_inset Formula $\beta=\beta_{0}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+incluido el caso particular de 
+\begin_inset Quotes eld
+\end_inset
+
+no interacción
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Formula $\beta_{0}\left(t\right)=0\ \forall\ t$
+\end_inset
+
+, y
+\end_layout
+
+\begin_layout Enumerate
+para la significatividad global, estimando previamente 
+\begin_inset Formula $\beta$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Uncover
+status open
+
+\begin_layout Plain Layout
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
++-
+\end_layout
+
+\end_inset
+
+La clave, está en el siguiente lema, adaptado de 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Patilea 2012"
+literal "false"
+
+\end_inset
+
+, que permite caracterizar 
+\begin_inset Formula $H_{0}:m\in\mathcal{M}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+MLF con respuesta escalar
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Consideremos
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
++-
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\H=L^{2}\left[a,b\right]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\left\{ \Psi_{j}\right\} _{j=1}^{\infty}$
+\end_inset
+
+una base de 
+\begin_inset Formula $\H$
+\end_inset
+
+, no necesariamente ortogonal,
+\end_layout
+
+\begin_layout Itemize
+la 
+\emph on
+esfera funcional
+\emph default
+ 
+\begin_inset Formula $\mathbb{S_{H}}\left\{ h\in\H:\left\Vert h\right\Vert _{\H}=1\right\} $
+\end_inset
+
+, y
+\end_layout
+
+\begin_layout Itemize
+la 
+\emph on
+esfera funcional p-dimensional 
+\begin_inset Formula $\mathbb{S}_{\H}^{p}=\left\{ h=\sum_{j=1}^{p}x_{j}\Psi_{j}\in\mathbb{H}:\|h\|_{\mathbb{H}}=1\right\} $
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout ExampleBlock
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
++-
+\end_layout
+
+\end_inset
+
+
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Lema 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Patilea 2012"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout ExampleBlock
+Sea 
+\begin_inset Formula $\beta$
+\end_inset
+
+ un elemento de 
+\begin_inset Formula $\H$
+\end_inset
+
+.
+ Las siguientes afirmaciones son equivalentes:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
++-
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $m\left(X\right)=\left\langle X,\beta\right\rangle \forall X\in\H$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mathbb{E}\left[Y-\left\langle X,\beta\right\rangle |X=x\right]=0$
+\end_inset
+
+ para casi todo (p.c.t.) 
+\begin_inset Formula $x\in\H$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mathbb{E}\left[Y-\left\langle X,\beta\right\rangle |\left\langle X,\gamma\right\rangle =u\right]=0$
+\end_inset
+
+ p.c.t.
+ 
+\begin_inset Formula $u\in\mathbb{R}$
+\end_inset
+
+ y 
+\begin_inset Formula $\forall\gamma\in\mathbb{S_{H}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mathbb{E}\left[Y-\left\langle X,\beta\right\rangle |X=x\right]=0$
+\end_inset
+
+ p.c.t.
+ 
+\begin_inset Formula $u\in\mathbb{R}$
+\end_inset
+
+ y 
+\begin_inset Formula $\forall\gamma\in\mathbb{S}_{\H}^{p},\forall p\geq1$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Standard
+\begin_inset Flex Beamer Note
+status open
+
+\begin_layout Plain Layout
+Este resultado es realmente fuerte: no sólo alcanza con una dirección aleatoria
+ para caracterizar la hipótesis nula, sino que dicha dirección puede provenir
+ de un subespacio de dimensión finita, siempre y cuando éste se elija con
+ mínimos cuidados.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+ANOVA funcional 
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+ANOVA funcional
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Descripción del test
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Descripción del test
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cuesta 2010"
+literal "false"
+
+\end_inset
+
+ propone un procedimiento relativamente sencillo para diseños con dos factores,
+ interacciones y covariables funcionales.
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Standard
+Sean
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\H$
+\end_inset
+
+ un espacio de Hilbert separable con producto interno 
+\begin_inset Formula $\left\langle \cdot,\cdot\right\rangle $
+\end_inset
+
+ medido w.l.g.
+ en el intervalo 
+\begin_inset Formula $\left[0,1\right]$
+\end_inset
+
+, y
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $R,S\in\mathbb{N}:\forall\left(r,s\right)\in\left\{ 1,\dots,R\right\} \times\left\{ 1,\dots,S\right\} $
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Standard
+Y existen 
+\begin_inset Formula $X_{i}^{r,s},i\in\left\{ 1,\dots,n_{r,s}\right\} $
+\end_inset
+
+ e.
+ a.
+ en 
+\begin_inset Formula $\H$
+\end_inset
+
+ tales que
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-15pt}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+X_{i}^{r,s}\left(t\right)=m\left(t\right)+f^{r}\left(t\right)+g^{s}\left(t\right)+h^{r,s}\left(t\right)+\gamma\left(t\right)Y_{i}^{r,s}+\epsilon_{i}^{r,s}\left(t\right),\quad t\in\left[0,1\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Descripción del test
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Formula 
+\[
+X_{i}^{r,s}\left(t\right)=m\left(t\right)+f^{r}\left(t\right)+g^{s}\left(t\right)+h^{r,s}\left(t\right)+\gamma\left(t\right)Y_{i}^{r,s}+\epsilon_{i}^{r,s}\left(t\right),\quad t\in\left[0,1\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Standard
+donde
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
++-
+\end_layout
+
+\end_inset
+
+la función 
+\begin_inset Formula $m$
+\end_inset
+
+ es fija y describe la forma general del proceso,
+\end_layout
+
+\begin_layout Enumerate
+las funciones fijas 
+\begin_inset Formula $f^{r},g^{s},h^{r,s}\in\H$
+\end_inset
+
+ representan, respectivamente, el efecto del primer y segundo factor, y
+ la interacción entre ambos.
+\begin_inset Flex Beamer Note
+status open
+
+\begin_layout Plain Layout
+Como en todo diseño, es necesario hacer algún tipo de supuestos de identificabil
+idad 
+\emph on
+alla
+\emph default
+ 
+\begin_inset Formula $\sum_{r}f^{r}\left(t\right)=0$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Las 
+\begin_inset Formula $Y_{i}^{r,s}\in\mathbb{R}$
+\end_inset
+
+ son cantidades aleatorias y conocidas que influyen el proceso según el
+ peso de la función fija y conocida 
+\begin_inset Formula $\gamma\in\H$
+\end_inset
+
+.
+\begin_inset Flex Beamer Note
+status open
+
+\begin_layout Enumerate
+Las 
+\begin_inset Formula $Y_{i}^{r,s}$
+\end_inset
+
+juegan el papel de las covariables en el caso unidimensional.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Las trayectorias aleatorias 
+\begin_inset Formula $\epsilon_{i}^{r,s}\left(t\right)\in\H$
+\end_inset
+
+ se asumen independientes y centradas.
+ Además, para cada par 
+\begin_inset Formula $\left(r,s\right)$
+\end_inset
+
+ fijo, 
+\begin_inset Formula $\epsilon_{i}^{r,s}\sim\text{iid}\ \forall\ i\in\left\{ 1,\dots,n_{r,s}\right\} $
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Descripción del test
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Las hipótesis de interés son:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-15pt}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{2}
+H_{0}^{A}: & f^{1}=\dots=f^{R}=0 & \textnormal{(el primer factor no tiene efecto)}\\
+H_{0}^{B}: & g^{1}=\dots=g^{S}=0 & \textnormal{(el segundo factor no tiene efecto)}\\
+H_{0}^{I}: & h^{1,1}=\dots=h^{R,S}=0 & \textnormal{(no hay interacción)}\\
+H_{0}^{C}: & \gamma=0 & \textnormal{(la covariable no es significativa)}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Standard
+Consideraremos especialmente 
+\begin_inset Formula $H_{0}^{A}.$
+\end_inset
+
+ Por CFR, si existen 
+\begin_inset Formula $r_{1,}r_{2}:f^{r_{1}}\neq f^{r_{2}}$
+\end_inset
+
+, para cualquier medida 
+\begin_inset Formula $\mu$
+\end_inset
+
+ gaussiana no-degenerada en 
+\begin_inset Formula $\H$
+\end_inset
+
+,
+\begin_inset Formula 
+\[
+\mu\left\{ v\in\H:\left\langle v,f^{1}\right\rangle =\dots=\left\langle v,f^{R}\right\rangle \right\} =0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Standard
+Sea 
+\begin_inset Formula $v$
+\end_inset
+
+ un elemento elegido al azar según 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ Luego, condicional a que 
+\begin_inset Formula $H_{0}^{A}$
+\end_inset
+
+ se cumple, para cada 
+\begin_inset Formula $v\in\H$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-15pt}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+H_{0}^{A,v}:\left\langle v,f^{1}\right\rangle =\dots=\left\langle v,f^{R}\right\rangle =0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+también se cumple, y si 
+\begin_inset Formula $H_{0}^{A}$
+\end_inset
+
+ no se cumple, 
+\begin_inset Formula $\mu-\textnormal{c.s.}\ H_{0}^{A,v}$
+\end_inset
+
+ tampoco.
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Consideraciones prácticas
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Consideraciones prácticas
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout AlertBlock
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
++-
+\end_layout
+
+\end_inset
+
+
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Supuestos del modelo
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
++-
+\end_layout
+
+\end_inset
+
+Al igual que en ANOVA clásico, las hipótesis de homocedasticidad y/o gaussianida
+d de los datos son cruciales.
+ Para elegir qué test ANOVA aplicar, podemos analizar las proyecciones aleatoria
+s.
+ 
+\end_layout
+
+\begin_layout Itemize
+En funciones aleatorias, la homocedasticidad no es supuesto razonable, ya
+ que las oscilaciones del proceso suelen depender de sus valores, así que
+ conviene tener a manor un test ANOVA unidimensional que funcione bien bajo
+ condiciones de heterocedasticidad.
+\end_layout
+
+\end_deeper
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout AlertBlock
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
++-
+\end_layout
+
+\end_inset
+
+
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Potencia y estabilidad
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
++-
+\end_layout
+
+\end_inset
+
+El reemplazo de una función 
+\begin_inset Formula $\in\H$
+\end_inset
+
+ por un único número real acarrea pérdida de información, y por ende de
+ potencia para detectar alternativas
+\end_layout
+
+\begin_layout Itemize
+Al estar basado en una proyección elegida 
+\emph on
+al azar
+\emph default
+, de repetir el procedimiento dos o más veces podemos obtener resultados
+ diferentes.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+False Discovery Rate
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Para reducir estos inconvenientes, se pueden tomar 
+\begin_inset Formula $k>1$
+\end_inset
+
+proyecciones aleatorias, testear 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ bajo c.u.
+ y combinar los 
+\emph on
+p-valores
+\emph default
+ obtenidos de alguna forma: 
+\begin_inset Flex Uncover
+status open
+
+\begin_layout Plain Layout
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
++-
+\end_layout
+
+\end_inset
+
+bootstrap (muy lenta),
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex Uncover
+status open
+
+\begin_layout Plain Layout
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
++-
+\end_layout
+
+\end_inset
+
+Bonferroni (muy conservadora) 
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex Uncover
+status open
+
+\begin_layout Plain Layout
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
++-
+\end_layout
+
+\end_inset
+
+o 
+\emph on
+false discovery rate
+\emph default
+ (FDR).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Standard
+Si se testean 
+\begin_inset Formula $k$
+\end_inset
+
+ diferentes hipótesis, La 
+\emph on
+
+\begin_inset Quotes eld
+\end_inset
+
+tasa de falso descubrimiento
+\begin_inset Quotes erd
+\end_inset
+
+
+\emph default
+ es la proporción esperada de hipótesis incorrectamente rechazadas.
+ Si se testea 
+\begin_inset Formula $k$
+\end_inset
+
+ veces la misma hipótesis, la FDR coincide con el nivel de significación
+ del test.
+ 
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Standard
+En particular, si 
+\begin_inset Formula $p_{\left(1\right)}\leq\dots\leq p_{\left(k\right)}$
+\end_inset
+
+son los 
+\begin_inset Formula $k$
+\end_inset
+
+p-valores (ordenados), el nivel de un test que rechace 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+cuando 
+\begin_inset Formula $\alpha\geq\inf\left\{ \frac{k}{i}p_{\left(i\right)},i=1,\dots,k\right\} $
+\end_inset
+
+ es, a lo sumo, de 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout AlertBlock
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+FDR vs.
+ Bonferroni
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout AlertBlock
+Bonferroni rechaza con nivel 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ cuando 
+\begin_inset Formula $p_{\left(1\right)}\leq$
+\end_inset
+
+
+\begin_inset Formula $\alpha/k$
+\end_inset
+
+, en cuyo caso FDR también rechaza.
+ En la práctica, FDR suele ser mucho menos conservador que Bonferroni.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Consideraciones prácticas: ¿cuántas direcciones tomar?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Resta definir el número de proyecciones.
+ 
+\begin_inset Formula $k=30$
+\end_inset
+
+ es más que suficientemente conservador, y en algunos casos bastará con
+ 
+\begin_inset Formula $k\in\left\{ 1,\dots,5\right\} $
+\end_inset
+
+.
+ Es importante considerar que a mayor 
+\begin_inset Formula $k$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Itemize
+Bajo 
+\begin_inset Formula $H_{0},$
+\end_inset
+
+ más conservador resulta el test y menor será la probabilidad de rechazo
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Itemize
+bajo una alternativa fija 
+\begin_inset Formula $H_{1}$
+\end_inset
+
+, mayor será la probabilidad de rechazo
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Standard
+Este último efecto puede deberse a que mientras más direcciones aleatorias
+ se tomen, más altas son las chances de que la alternativa correlacione
+ fuertemente con alguna de ellas y este efecto contrarreste lo conservador
+ del procedimiento.
+ Por ello, en 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cuesta 2010"
+literal "false"
+
+\end_inset
+
+ recomiendan tomar 
+\begin_inset Formula $k=\min\left\{ 30,n\right\} .$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+En R: usando 
+\family typewriter
+fda.usc::fanova.RPm
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+
++-
+\end_layout
+
+\end_inset
+
+
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+En R: usando 
+\family typewriter
+fda.usc::fanova.RPm
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=FALSE,results='hide'>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+# some setup
+\end_layout
+
+\begin_layout Plain Layout
+
+options(width=60)  # make the printing fit on the page
+\end_layout
+
+\begin_layout Plain Layout
+
+set.seed(1121)   # make the results repeatable
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<message=FALSE>>= 
+\end_layout
+
+\begin_layout Plain Layout
+
+library(fda.usc)
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<>>= 
+\end_layout
+
+\begin_layout Plain Layout
+
+X <- cbind(fda::growth$hgtm, fda::growth$hgtf)
+\end_layout
+
+\begin_layout Plain Layout
+
+grilla <- fda::growth$age
+\end_layout
+
+\begin_layout Plain Layout
+
+factores <- data.frame(
+\end_layout
+
+\begin_layout Plain Layout
+
+    varon=as.factor(startsWith(colnames(X) , "boy"))
+\end_layout
+
+\begin_layout Plain Layout
+
+)
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<>>= 
+\end_layout
+
+\begin_layout Plain Layout
+
+X.fd <- fdata(mdata=t(X), argvals=grilla)
+\end_layout
+
+\begin_layout Plain Layout
+
+test <- fanova.RPm(X.fd, ~ varon, factores, RP=1)
+\end_layout
+
+\begin_layout Plain Layout
+
+test$p.FDR
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Frame
+\start_of_appendix
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Referencias
+\end_layout
+
+\end_inset
+
+
+\begin_inset Argument 3
+status open
+
+\begin_layout Plain Layout
+shrink=30
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Bibliography
+\labelwidthstring References
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "Cuesta 2007"
+key "Cuesta 2007"
+literal "true"
+
+\end_inset
+
+Cuesta-Albertos, J.
+ A., del Barrio, E., Fraiman, R., & Matrán, C.
+ (2007).
+ The random projection method in goodness of fit for functional data.
+ Computational Statistics & Data Analysis, 51(10), 4814-4831.
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring References
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "Cuevas 2007"
+key "Cuevas 2007"
+literal "false"
+
+\end_inset
+
+Cuevas, A., Febrero, M., & Fraiman, R.
+ (2007).
+ Robust estimation and classification for functional data via projection-based
+ depth notions.
+ Computational Statistics, 22(3), 481-496.
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring References
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "Cuesta 2010"
+key "Cuesta 2010"
+literal "false"
+
+\end_inset
+
+Cuesta-Albertos, J.
+ A., & Febrero-Bande, M.
+ (2010).
+ A simple multiway ANOVA for functional data.
+ Test, 19(3), 537-557.
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring References
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "Patilea 2012"
+key "Patilea 2012"
+literal "false"
+
+\end_inset
+
+Patilea, V., Sanchez-Sellero, C., & Saumard, M.
+ (2012).
+ Projection-based nonparametric goodness-of-fit testing with functional
+ covariates.
+ arXiv preprint arXiv:1205.5578.
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring References
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "Garcia 2014"
+key "Garcia 2014"
+literal "false"
+
+\end_inset
+
+García-Portugués, E., González-Manteiga, W., & Febrero-Bande, M.
+ (2014).
+ A goodness-of-fit test for the functional linear model with scalar response.
+ Journal of Computational and Graphical Statistics, 23(3), 761-778.
+ 
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring References
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "Cuesta 2017"
+key "Cuesta 2017"
+literal "false"
+
+\end_inset
+
+Cuesta-Albertos, J.
+ A., Febrero-Bande, M., & de la Fuente, M.
+ O.
+ (2017).
+ The 
+\begin_inset Formula $\hbox{DD}^{G}$
+\end_inset
+
+-classifier in the functional setting.
+ Test, 26(1), 119-142.
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring References
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "Cuesta 2019"
+key "Cuesta 2019"
+literal "false"
+
+\end_inset
+
+Cuesta-Albertos, J.
+ A., García-Portugués, E., Febrero-Bande, M., & González-Manteiga, W.
+ (2019).
+ Goodness-of-fit tests for the functional linear model based on randomly
+ projected empirical processes.
+ The Annals of Statistics, 47(1), 439-467.
+\end_layout
+
+\begin_layout Bibliography
+\labelwidthstring References
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "fda.usc"
+key "fda.usc"
+literal "false"
+
+\end_inset
+
+ Librería fda.usc
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+¡Gracias!
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+En GitHub: <LINK>
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,711 @@
+\batchmode
+\makeatletter
+\def\input@path{{/home/gonzalo/maestria/funcional/}}
+\makeatother
+\documentclass[10pt,spanish]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage{amstext}
+\usepackage{amssymb}
+\usepackage{fontspec}
+\usepackage{mathtools}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+% this default might be overridden by plain title style
+\newcommand\makebeamertitle{\frame{\maketitle}}%
+% (ERT) argument for the TOC
+\AtBeginDocument{%
+  \let\origtableofcontents=\tableofcontents
+  \def\tableofcontents{\@ifnextchar[{\origtableofcontents}{\gobbletableofcontents}}
+  \def\gobbletableofcontents#1{\origtableofcontents}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usetheme[block=fill]{metropolis}
+%\useinnertheme{metropolis}
+%\useoutertheme{metropolis}
+%\usefonttheme{metropolis}
+%\usecolortheme{metropolis}
+%\usetheme{Darmstadt}
+%\usetheme{Frankfurt}
+% or ...
+
+%\setbeamercovered{transparent}
+
+\makeatother
+
+\usepackage{polyglossia}
+\setdefaultlanguage{spanish}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+\global\long\def\H{\mathbb{H}}%
+
+
+\title[Proyecciones Aleatorias]{Proyecciones en Direcciones Aleatorias}
+\subtitle{o “Cómo reducir dimensionalidad sin pensar demasiado”}
+\author{Gonzalo Barrera Borla }
+\institute{Universidad de Buenos Aires}
+\date{Análisis de Datos Funcionales, 2020}
+
+\makebeamertitle
+
+%\beamerdefaultoverlayspecification{<+->}
+
+%\AtBeginSubsection[]{%
+%  \frame<beamer>{ 
+%    \frametitle{Outline}   
+%   \tableofcontents[currentsection,currentsubsection] 
+% }
+%}
+
+%\setbeamertemplate{note page}[plain]
+%\setbeameroption{show notes}
+\setbeamertemplate{section in toc}[sections numbered] 
+\begin{frame}{Contenido}
+
+\tableofcontents{}
+\end{frame}
+
+\section{Motivación}
+
+\subsection{El problema: caracterizar e. a. $\infty-\text{dimensionales}$}
+\begin{frame}{El problema: caracterizar e. a. $\infty-\text{dimensionales}$}
+
+Caracterizar elementos aleatorias en espacios $\infty$-dimensionales
+implica expresarlos (i.e. proyectarlos) en \emph{algún} subespacio
+de $\H$:
+
+\pause{}
+\begin{itemize}
+\item bases fijas: Fourier, b-splines, ...
+\end{itemize}
+
+\pause{}
+\begin{itemize}
+\item descomposiciones data-dependientes: FPC/KLT, FCC, ...
+\end{itemize}
+
+\pause{}
+\begin{itemize}
+\item o en direcciones aleatorias.
+\end{itemize}
+
+\pause{}
+
+¿Guarda alguna información útil una proyección aleatoria?
+
+\pause{}
+
+Resulta que sí, y bastante.
+\end{frame}
+
+\subsection{Una herramienta más: direcciones aleatorias}
+\begin{frame}{Una herramienta más: direcciones aleatorias}
+
+Sean
+\begin{itemize}
+\item $X,Y$ elementos aleatorios (e. a.) en el espacio de Hilbert $\H,\ X\sim P,\ Y\sim Q$,
+\end{itemize}
+
+\pause{}
+\begin{itemize}
+\item $P\in DM\left(\H\right)$, una distribución \emph{determinada por
+sus momentos}, y
+\end{itemize}
+
+\pause{}
+\begin{itemize}
+\item $\mathbb{E}$ el cono cerrado $\mathbb{E}\left(X,Y\right)\coloneqq\left\{ \alpha\in\mathbb{H}:\left\langle X,\alpha\right\rangle \sim\left\langle Y,\alpha\right\rangle \right\} $
+\end{itemize}
+
+\pause{}
+\begin{exampleblock}{Teorema Cuesta - Fraiman - Ransford}
+
+(Adaptado de \cite{Cuesta 2007}) Sea $\mu$ una distribución Gaussiana
+no-degenerada en $\H$. Luego, 
+\[
+X\sim Y\iff\mu\left[\mathbb{E}\left(X,Y\right)\right]>0
+\]
+.
+\end{exampleblock}
+\end{frame}
+\note{Alguna información siempre van a guardar, la pregunta es qué se puede
+decir a partir de ella. Resulta que bastante
+
+E el cono determinado por las direcciones alfa en las que las distribuciones
+marginales de X e Y conciden
+
+Es un resultado bastante fuerte. Eligiendo direcciones $\alpha$ al
+azar según cierta distribución sencilla, si la distribución de las
+proyecciones de X e Y en alfa coinciden, casi-seguramente coinciden
+las distribuciones de X e Y.}
+
+\section[Aplicaciones]{Algunas aplicaciones}
+
+\subsection[Profundidad aleatoria]{Noción de Profundidad}
+\begin{frame}{Profundidad aleatoria proyectada}
+
+Existen distintas nociones de profundad posibles posibles en $\H$:
+
+\pause{}
+\begin{itemize}
+\item profundidad \emph{integrada} de Fraiman y Muniz,
+\end{itemize}
+
+\pause{}
+\begin{itemize}
+\item el método de la \emph{h-moda},
+\end{itemize}
+
+\pause{}
+\begin{itemize}
+\item en direcciones aleatorias.
+\end{itemize}
+\end{frame}
+%
+\begin{frame}{Profundidad aleatoria proyectada}
+
+Dada una muestra $\mathbf{X}=\left\{ X_{i}\right\} _{i=1}^{n}$, sean
+\begin{itemize}
+\item $\alpha\in\H$ una dirección aleatoria independiente de $\mathbf{X}$
+y
+\end{itemize}
+
+\pause{}
+\begin{itemize}
+\item $\mathbf{x}=\left\{ x_{i}:x_{i}=\left\langle X_{i},\alpha\right\rangle \right\} _{i=1}^{n}$
+la proyección de cada elemento de $\mathbf{X}$ en ella.
+\end{itemize}
+
+\pause{}
+
+La \emph{profundidad aleatoria proyectada }muestral del dato original
+$\mathop{RPD}\left(X_{i}\right)$ se define como la profundidad unidimensional
+de $x_{i}$, expresada en términos del cuantil \emph{aleatorio} de
+$x_{i}$ en $\mathbf{x}$.
+
+\pause{}
+\begin{alertblock}{¡Ojo!}
+
+Al ser una medida aleatoria, hay que controlar su variabilidad, típicamente
+promediando sobre múltiples proyecciones $\left\{ \alpha_{i}\right\} _{i=1}^{n}$.
+\end{alertblock}
+
+\pause{}
+
+Estas medidas de profundidad se pueden usadas como covariables en
+tareas de regresión \cite{Cuevas 2007} y y clasificación \cite{Cuevas 2007,Cuesta 2017}.
+\end{frame}
+
+\subsection{Test de hipótesis vía proyecciones:}
+
+\subsubsection{Bondad de ajuste}
+\begin{frame}{Bondad de ajuste para familias paramétricas}
+
+Consideremos la hipótesis de pertenencia a cierta familia de distribuciones
+paramétricas
+
+\begin{align*}
+H_{0} & :P\in\mathcal{P}\coloneqq\left\{ P\left(\cdot,\theta\right):\theta\in\Theta\right\} \quad\text{vs.}\quad H_{1}:P\notin\mathcal{P}\\
+\end{align*}
+
+
+\pause{}
+
+¿Cómo se usaría el teorema de Cuesta-Fraiman-Ransford para construir
+tests a partir de proyecciones aleatorias?
+\end{frame}
+%
+\begin{frame}{Bondad de ajuste para familias paramétricas}
+
+\cite{Cuesta 2007} considera familias paramétricas
+\begin{enumerate}[<+->]
+\item invariantes
+\begin{enumerate}[<+->]
+\item por locación (\emph{l-}invariantes\emph{)}: $X\sim P_{X}\in\mathcal{P},Y=X+m\Rightarrow P_{y}\in\mathcal{P}$
+\item por escala (\emph{s-}invariantes\emph{)}: $X\sim P_{X}\in\mathcal{P},Y=\Sigma X\Rightarrow P_{y}\in\mathcal{P}$
+\item elípticas (\emph{l- y s- }invariantes)
+\end{enumerate}
+\item \emph{ciertas }familias no-invariantes, donde
+\begin{itemize}
+\item $\mathcal{P}\coloneqq\left\{ \mathcal{L}\left(sX+g\right):s\in\mathbb{R}\land g\in V_{n}\right\} $
+y
+\item $V_{n}$ es un subespacio finito-dimensional de $\mathbb{H}$
+\end{itemize}
+\end{enumerate}
+
+\pause{}
+
+y prueba que familias del tipo
+\begin{enumerate}[<+->]
+\item están \emph{determinadas en probabilidad} (d. p.) por una única proyección
+aleatoria.
+\item con $n$ parámetros están d. p. por $k=n+1$ proyecciones aleatorias.
+\end{enumerate}
+\end{frame}
+%
+\begin{frame}{Bondad de ajuste para familias paramétricas}
+
+En cualquier caso, si la familia determinada por $\left\{ h_{i}\right\} _{i=1}^{k}$
+proyecciones aleatorias $\mu-\text{generadas}$, resulta que la \emph{hipótesis
+proyectada}
+
+\vspace{-15pt}
+
+\begin{align*}
+H_{0}^{h} & :\left(P_{h_{1}},\ldots,P_{h_{k}}\right)\in\mathcal{P}_{h_{1},\ldots,h_{k}}:=\left\{ \left(P_{h_{1}}(\cdot,\theta),\ldots,P_{h_{k}}(\cdot,\theta)\right):\theta\in\Theta\right\} 
+\end{align*}
+
+
+\pause{}
+
+es $\mu^{k}-\text{casi seguramente}$($\mu^{k}-c.s.$) equivalente
+a la hipótesis original, ya que $\mu^{k}-c.s.$
+
+\vspace{-15pt}
+
+\begin{align*}
+\left(P_{h_{1}},\ldots,P_{h_{k}}\right)\in\mathcal{P}_{h_{1},\ldots,h_{k}} & \iff P\in\mathcal{P}\\
+H_{0}^{h} & \iff H_{0}
+\end{align*}
+
+
+\pause{}
+
+Y para alguna medida apropiada de distancia $d$ que mida el desvío
+de $P$ c.r.a. $\mathcal{P}$ bajo $H_{0}$, $\mu^{k}-c.s.$
+
+\vspace{-15pt}
+
+\[
+\max_{i=1,\ldots,k}d\left(P_{h_{i}},P_{h_{i}}(\cdot,\theta)\right)=0
+\]
+
+\end{frame}
+%
+\begin{frame}{Bondad de ajuste para familias paramétricas}
+
+Tomando por $d$ la distancia Kolmogoro-Smirnov, podemos basar el
+test en el estadístico
+
+\[
+D_{n}:=\max_{i=1,\ldots,k}\sqrt{n}d\left(\left(\mathbb{P}_{n}\right)_{h_{i}},P_{h_{i}}(\cdot,\theta)\right)
+\]
+
+i.e. el máximo de $k$estadísticos K-S univariados, donde $\mathbb{P}_{n}$es
+la distribución empírica basada en $\left\{ X_{i}\right\} _{i=1}^{n}$.
+
+\pause{}
+
+Restan dos dificultades:
+\begin{itemize}
+\item Cuando $k=1$, el estadístico K-S es de distribución libre, pero para
+$k>1$ ya no.
+\end{itemize}
+
+\pause{}
+\begin{itemize}
+\item Salvo para hipótesis “simples” $H_{0}:P_{0}=P\left(\cdot,\theta_{0}\right)$,
+es necesario estimar $\theta$ a partir de $\mathbf{X}$.
+\end{itemize}
+
+\pause{}
+
+Así que tendremos que contentarnos con un estimador $\hat{D_{n}}$
+de $D_{n}$. Para aproximar la distribución de $\hat{D_{n}}$, sugieren
+un procedimiento bootstrap y prueban que vale bajo ciertas condiciones.
+\end{frame}
+%
+
+\subsubsection{MLF con respuesta escalar}
+\begin{frame}{MLF con respuesta escalar}
+
+\cite{Garcia 2014,Cuesta 2019} aplican estas ideas al modelo lineal
+funcional con respuesta escalar
+
+\[
+Y=\left\langle X,\beta\right\rangle +\varepsilon=\int X\left(t\right)\beta\left(t\right)dt+\varepsilon
+\]
+
+donde $X,\beta\in\H,Y\in\mathbb{R}$ y se sostienen los supuestos
+clásicos sobre $\epsilon$ detallados en los apuntes de clase.
+
+\pause{}
+
+La predicción de $Y$ se hace a partir de la esperanza condicional
+
+\[
+m\left(X\right)=E\left[Y|X\right]=\left\langle X,\beta\right\rangle 
+\]
+
+
+\pause{}
+
+de manera que las siguientes expresiones son equivalentes:
+\begin{itemize}
+\item El MLF representa adecuadamente la relación entre $X$ e $Y$
+\item $m\left(X\right)\in\mathcal{M}\coloneqq\left\{ \left\langle \cdot,\beta\right\rangle :\beta\in\H\right\} $
+\end{itemize}
+\end{frame}
+%
+\begin{frame}{MLF con respuesta escalar}
+
+A partir de aquí, se pueden utilizar las técnicas antes mencionadas
+para construir tests
+\begin{enumerate}[<+->]
+\item para hipótesis simples : $\beta=\beta_{0}$
+\item incluido el caso particular de “no interacción”, $\beta_{0}\left(t\right)=0\ \forall\ t$,
+y
+\item para la significatividad global, estimando previamente $\beta$ 
+\end{enumerate}
+\uncover<+->{La clave, está en el siguiente lema, adaptado de \cite{Patilea 2012},
+que permite caracterizar $H_{0}:m\in\mathcal{M}$.}
+\end{frame}
+%
+\begin{frame}{MLF con respuesta escalar}
+
+Consideremos
+\begin{itemize}[<+->]
+\item $\H=L^{2}\left[a,b\right]$
+\item $\left\{ \Psi_{j}\right\} _{j=1}^{\infty}$una base de $\H$, no necesariamente
+ortogonal,
+\item la \emph{esfera funcional} $\mathbb{S_{H}}\left\{ h\in\H:\left\Vert h\right\Vert _{\H}=1\right\} $,
+y
+\item la \emph{esfera funcional p-dimensional $\mathbb{S}_{\H}^{p}=\left\{ h=\sum_{j=1}^{p}x_{j}\Psi_{j}\in\mathbb{H}:\|h\|_{\mathbb{H}}=1\right\} $. }
+\end{itemize}
+\begin{exampleblock}<+->{Lema \cite{Patilea 2012}}
+
+Sea $\beta$ un elemento de $\H$. Las siguientes afirmaciones son
+equivalentes:
+\begin{enumerate}[<+->]
+\item $m\left(X\right)=\left\langle X,\beta\right\rangle \forall X\in\H$
+\item $\mathbb{E}\left[Y-\left\langle X,\beta\right\rangle |X=x\right]=0$
+para casi todo (p.c.t.) $x\in\H$
+\item $\mathbb{E}\left[Y-\left\langle X,\beta\right\rangle |\left\langle X,\gamma\right\rangle =u\right]=0$
+p.c.t. $u\in\mathbb{R}$ y $\forall\gamma\in\mathbb{S_{H}}$
+\item $\mathbb{E}\left[Y-\left\langle X,\beta\right\rangle |X=x\right]=0$
+p.c.t. $u\in\mathbb{R}$ y $\forall\gamma\in\mathbb{S}_{\H}^{p},\forall p\geq1$
+\end{enumerate}
+\end{exampleblock}
+\end{frame}
+\note{Este resultado es realmente fuerte: no sólo alcanza con una dirección
+aleatoria para caracterizar la hipótesis nula, sino que dicha dirección
+puede provenir de un subespacio de dimensión finita, siempre y cuando
+éste se elija con mínimos cuidados.}
+
+\section[ANOVA funcional]{ANOVA funcional }
+
+\subsection{Descripción del test}
+\begin{frame}{Descripción del test}
+
+\cite{Cuesta 2010} propone un procedimiento relativamente sencillo
+para diseños con dos factores, interacciones y covariables funcionales.
+
+\pause{}
+
+Sean
+\begin{itemize}
+\item $\H$ un espacio de Hilbert separable con producto interno $\left\langle \cdot,\cdot\right\rangle $
+medido w.l.g. en el intervalo $\left[0,1\right]$, y
+\item $R,S\in\mathbb{N}:\forall\left(r,s\right)\in\left\{ 1,\dots,R\right\} \times\left\{ 1,\dots,S\right\} $ 
+\end{itemize}
+
+\pause{}
+
+Y existen $X_{i}^{r,s},i\in\left\{ 1,\dots,n_{r,s}\right\} $ e. a.
+en $\H$ tales que
+
+\vspace{-15pt}
+
+\[
+X_{i}^{r,s}\left(t\right)=m\left(t\right)+f^{r}\left(t\right)+g^{s}\left(t\right)+h^{r,s}\left(t\right)+\gamma\left(t\right)Y_{i}^{r,s}+\epsilon_{i}^{r,s}\left(t\right),\quad t\in\left[0,1\right]
+\]
+
+\end{frame}
+%
+\begin{frame}{Descripción del test}
+
+\[
+X_{i}^{r,s}\left(t\right)=m\left(t\right)+f^{r}\left(t\right)+g^{s}\left(t\right)+h^{r,s}\left(t\right)+\gamma\left(t\right)Y_{i}^{r,s}+\epsilon_{i}^{r,s}\left(t\right),\quad t\in\left[0,1\right]
+\]
+
+
+\pause{}
+
+donde
+\begin{enumerate}[<+->]
+\item la función $m$ es fija y describe la forma general del proceso,
+\item las funciones fijas $f^{r},g^{s},h^{r,s}\in\H$ representan, respectivamente,
+el efecto del primer y segundo factor, y la interacción entre ambos.\note{Como en todo diseño, es necesario hacer algún tipo de supuestos de
+identificabilidad \emph{alla} $\sum_{r}f^{r}\left(t\right)=0$.}
+\item Las $Y_{i}^{r,s}\in\mathbb{R}$ son cantidades aleatorias y conocidas
+que influyen el proceso según el peso de la función fija y conocida
+$\gamma\in\H$.\note{\begin{enumerate}
+\item Las $Y_{i}^{r,s}$juegan el papel de las covariables en el caso unidimensional.
+\end{enumerate}
+}
+\item Las trayectorias aleatorias $\epsilon_{i}^{r,s}\left(t\right)\in\H$
+se asumen independientes y centradas. Además, para cada par $\left(r,s\right)$
+fijo, $\epsilon_{i}^{r,s}\sim\text{iid}\ \forall\ i\in\left\{ 1,\dots,n_{r,s}\right\} $
+\end{enumerate}
+\end{frame}
+%
+\begin{frame}{Descripción del test}
+
+Las hipótesis de interés son:
+
+\vspace{-15pt}
+
+\begin{alignat*}{2}
+H_{0}^{A}: & f^{1}=\dots=f^{R}=0 & \textnormal{(el primer factor no tiene efecto)}\\
+H_{0}^{B}: & g^{1}=\dots=g^{S}=0 & \textnormal{(el segundo factor no tiene efecto)}\\
+H_{0}^{I}: & h^{1,1}=\dots=h^{R,S}=0 & \textnormal{(no hay interacción)}\\
+H_{0}^{C}: & \gamma=0 & \textnormal{(la covariable no es significativa)}
+\end{alignat*}
+
+
+\pause{}
+
+Consideraremos especialmente $H_{0}^{A}.$ Por CFR, si existen $r_{1,}r_{2}:f^{r_{1}}\neq f^{r_{2}}$,
+para cualquier medida $\mu$ gaussiana no-degenerada en $\H$,
+\[
+\mu\left\{ v\in\H:\left\langle v,f^{1}\right\rangle =\dots=\left\langle v,f^{R}\right\rangle \right\} =0
+\]
+
+
+\pause{}
+
+Sea $v$ un elemento elegido al azar según $\mu$. Luego, condicional
+a que $H_{0}^{A}$ se cumple, para cada $v\in\H$
+
+\vspace{-15pt}
+
+\[
+H_{0}^{A,v}:\left\langle v,f^{1}\right\rangle =\dots=\left\langle v,f^{R}\right\rangle =0
+\]
+
+también se cumple, y si $H_{0}^{A}$ no se cumple, $\mu-\textnormal{c.s.}\ H_{0}^{A,v}$
+tampoco.
+\end{frame}
+
+\subsection{Consideraciones prácticas}
+\begin{frame}{Consideraciones prácticas}
+\begin{alertblock}<+->{Supuestos del modelo}
+\begin{itemize}[<+->]
+\item Al igual que en ANOVA clásico, las hipótesis de homocedasticidad
+y/o gaussianidad de los datos son cruciales. Para elegir qué test
+ANOVA aplicar, podemos analizar las proyecciones aleatorias. 
+\item En funciones aleatorias, la homocedasticidad no es supuesto razonable,
+ya que las oscilaciones del proceso suelen depender de sus valores,
+así que conviene tener a manor un test ANOVA unidimensional que funcione
+bien bajo condiciones de heterocedasticidad.
+\end{itemize}
+\end{alertblock}
+
+\pause{}
+\begin{alertblock}<+->{Potencia y estabilidad}
+\begin{itemize}[<+->]
+\item El reemplazo de una función $\in\H$ por un único número real acarrea
+pérdida de información, y por ende de potencia para detectar alternativas
+\item Al estar basado en una proyección elegida \emph{al azar}, de repetir
+el procedimiento dos o más veces podemos obtener resultados diferentes.
+\end{itemize}
+\end{alertblock}
+\end{frame}
+%
+\begin{frame}{False Discovery Rate}
+
+Para reducir estos inconvenientes, se pueden tomar $k>1$proyecciones
+aleatorias, testear $H_{0}$ bajo c.u. y combinar los \emph{p-valores}
+obtenidos de alguna forma: \uncover<+->{bootstrap (muy lenta),} \uncover<+->{Bonferroni (muy conservadora) }\uncover<+->{o \emph{false discovery rate} (FDR).}
+
+\pause{}
+
+Si se testean $k$ diferentes hipótesis, La \emph{“tasa de falso
+descubrimiento”} es la proporción esperada de hipótesis incorrectamente
+rechazadas. Si se testea $k$ veces la misma hipótesis, la FDR coincide
+con el nivel de significación del test. 
+
+\pause{}
+
+En particular, si $p_{\left(1\right)}\leq\dots\leq p_{\left(k\right)}$son
+los $k$p-valores (ordenados), el nivel de un test que rechace $H_{0}$cuando
+$\alpha\geq\inf\left\{ \frac{k}{i}p_{\left(i\right)},i=1,\dots,k\right\} $
+es, a lo sumo, de $\alpha$.
+
+\pause{}
+\begin{alertblock}{FDR vs. Bonferroni}
+
+Bonferroni rechaza con nivel $\alpha$ cuando $p_{\left(1\right)}\leq$$\alpha/k$,
+en cuyo caso FDR también rechaza. En la práctica, FDR suele ser mucho
+menos conservador que Bonferroni.
+\end{alertblock}
+\end{frame}
+%
+\begin{frame}{Consideraciones prácticas: ¿cuántas direcciones tomar?}
+
+Resta definir el número de proyecciones. $k=30$ es más que suficientemente
+conservador, y en algunos casos bastará con $k\in\left\{ 1,\dots,5\right\} $.
+Es importante considerar que a mayor $k$,
+
+\pause{}
+\begin{itemize}
+\item Bajo $H_{0},$ más conservador resulta el test y menor será la probabilidad
+de rechazo
+\end{itemize}
+
+\pause{}
+\begin{itemize}
+\item bajo una alternativa fija $H_{1}$, mayor será la probabilidad de
+rechazo
+\end{itemize}
+
+\pause{}
+
+Este último efecto puede deberse a que mientras más direcciones aleatorias
+se tomen, más altas son las chances de que la alternativa correlacione
+fuertemente con alguna de ellas y este efecto contrarreste lo conservador
+del procedimiento. Por ello, en \cite{Cuesta 2010} recomiendan tomar
+$k=\min\left\{ 30,n\right\} .$
+\end{frame}
+
+\subsection{En R: usando \texttt{fda.usc::fanova.RPm}}
+\begin{frame}[<+->][fragile]{En R: usando \texttt{fda.usc::fanova.RPm}}
+
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(fda.usc)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\pause{}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{X} \hlkwb{<-} \hlkwd{cbind}\hlstd{(fda}\hlopt{::}\hlstd{growth}\hlopt{$}\hlstd{hgtm, fda}\hlopt{::}\hlstd{growth}\hlopt{$}\hlstd{hgtf)}
+\hlstd{grilla} \hlkwb{<-} \hlstd{fda}\hlopt{::}\hlstd{growth}\hlopt{$}\hlstd{age}
+\hlstd{factores} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}
+    \hlkwc{varon}\hlstd{=}\hlkwd{as.factor}\hlstd{(}\hlkwd{startsWith}\hlstd{(}\hlkwd{colnames}\hlstd{(X) ,} \hlstr{"boy"}\hlstd{))}
+\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\pause{}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{X.fd} \hlkwb{<-} \hlkwd{fdata}\hlstd{(}\hlkwc{mdata}\hlstd{=}\hlkwd{t}\hlstd{(X),} \hlkwc{argvals}\hlstd{=grilla)}
+\hlstd{test} \hlkwb{<-} \hlkwd{fanova.RPm}\hlstd{(X.fd,} \hlopt{~} \hlstd{varon, factores,} \hlkwc{RP}\hlstd{=}\hlnum{1}\hlstd{)}
+\hlstd{test}\hlopt{$}\hlstd{p.FDR}
+\end{alltt}
+\begin{verbatim}
+##            varon
+## RP1 2.038658e-11
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+\begin{frame}[shrink=30]{Referencias}
+
+\appendix
+\begin{thebibliography}{References}
+\bibitem[Cuesta 2007]{Cuesta 2007}Cuesta-Albertos, J. A., del Barrio,
+E., Fraiman, R., \& Matrán, C. (2007). The random projection method
+in goodness of fit for functional data. Computational Statistics \&
+Data Analysis, 51(10), 4814-4831.
+
+\bibitem[Cuevas 2007]{Cuevas 2007}Cuevas, A., Febrero, M., \& Fraiman,
+R. (2007). Robust estimation and classification for functional data
+via projection-based depth notions. Computational Statistics, 22(3),
+481-496.
+
+\bibitem[Cuesta 2010]{Cuesta 2010}Cuesta-Albertos, J. A., \& Febrero-Bande,
+M. (2010). A simple multiway ANOVA for functional data. Test, 19(3),
+537-557.
+
+\bibitem[Patilea 2012]{Patilea 2012}Patilea, V., Sanchez-Sellero,
+C., \& Saumard, M. (2012). Projection-based nonparametric goodness-of-fit
+testing with functional covariates. arXiv preprint arXiv:1205.5578.
+
+\bibitem[Garcia 2014]{Garcia 2014}García-Portugués, E., González-Manteiga,
+W., \& Febrero-Bande, M. (2014). A goodness-of-fit test for the functional
+linear model with scalar response. Journal of Computational and Graphical
+Statistics, 23(3), 761-778. 
+
+\bibitem[Cuesta 2017]{Cuesta 2017}Cuesta-Albertos, J. A., Febrero-Bande,
+M., \& de la Fuente, M. O. (2017). The $\hbox{DD}^{G}$-classifier
+in the functional setting. Test, 26(1), 119-142.
+
+\bibitem[Cuesta 2019]{Cuesta 2019}Cuesta-Albertos, J. A., García-Portugués,
+E., Febrero-Bande, M., \& González-Manteiga, W. (2019). Goodness-of-fit
+tests for the functional linear model based on randomly projected
+empirical processes. The Annals of Statistics, 47(1), 439-467.
+
+\bibitem[fda.usc]{fda.usc} Librería fda.usc
+\end{thebibliography}
+\end{frame}
+%
+\begin{frame}{¡Gracias!}
+
+En GitHub: <LINK>
+
+\end{frame}
+
+\end{document}

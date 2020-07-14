@@ -1,6 +1,6 @@
 \batchmode
 \makeatletter
-\def\input@path{{/home/gonzalo/maestria/funcional/}}
+\def\input@path{{/home/gonzalo/maestria/proyecciones-aleatorias/}}
 \makeatother
 \documentclass[10pt,spanish]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
 % maxwidth is the original width if it is less than linewidth
@@ -57,6 +57,13 @@
 \usepackage{amssymb}
 \usepackage{fontspec}
 \usepackage{mathtools}
+\ifx\hypersetup\undefined
+  \AtBeginDocument{%
+    \hypersetup{unicode=true}
+  }
+\else
+  \hypersetup{unicode=true}
+\fi
 
 \makeatletter
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
@@ -702,9 +709,13 @@ empirical processes. The Annals of Statistics, 47(1), 439-467.
 \end{thebibliography}
 \end{frame}
 %
-\begin{frame}{¡Gracias!}
+\begin{frame}[standout]
 
-En GitHub: <LINK>
+{\huge{}¡Gracias!}{\huge\par}
+
+\pause{}
+
+{\scriptsize{}\alert{{\scriptsize{}\href{https://github.com/memfcen-amateur/proyecciones-aleatorias/tree/master}{github.com/memfcen-amateur/proyecciones-aleatorias}}}}{\scriptsize\par}
 
 \end{frame}
 

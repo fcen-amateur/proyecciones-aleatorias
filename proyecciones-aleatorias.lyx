@@ -2923,11 +2923,11 @@ literal "false"
 \end_layout
 
 \begin_layout Frame
-\begin_inset Argument 4
+\begin_inset Argument 3
 status open
 
 \begin_layout Plain Layout
-¡Gracias!
+standout
 \end_layout
 
 \end_inset
@@ -2935,10 +2935,43 @@ status open
 
 \end_layout
 
-\begin_layout Frame
-En GitHub: <LINK>
+\begin_deeper
+\begin_layout Standard
+
+\size huge
+¡Gracias!
 \end_layout
 
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Standard
+
+\size scriptsize
+\begin_inset Flex Alert
+status open
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\begin_inset CommandInset href
+LatexCommand href
+name "github.com/memfcen-amateur/proyecciones-aleatorias"
+target "https://github.com/memfcen-amateur/proyecciones-aleatorias/tree/master"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \begin_layout Frame
 
 \end_layout

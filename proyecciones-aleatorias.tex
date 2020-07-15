@@ -116,7 +116,7 @@
 
 %\setbeamertemplate{note page}[plain]
 %\setbeameroption{show notes}
-\setbeamertemplate{section in toc}[sections numbered] 
+\setbeamertemplate{section in toc}[sections numbered]
 \begin{frame}{Contenido}
 
 \tableofcontents{}
@@ -439,7 +439,7 @@ equivalentes:
 para casi todo (p.c.t.) $x\in\H$
 \item $\mathbb{E}\left[Y-\left\langle X,\beta\right\rangle |\left\langle X,\gamma\right\rangle =u\right]=0$
 p.c.t. $u\in\mathbb{R}$ y $\forall\gamma\in\mathbb{S_{H}}$
-\item $\mathbb{E}\left[Y-\left\langle X,\beta\right\rangle |X=x\right]=0$
+\item $\mathbb{E}\left[Y-\left\langle X,\beta\right\rangle |\left\langle X,\gamma\right\rangle =u\right]=0$
 p.c.t. $u\in\mathbb{R}$ y $\forall\gamma\in\mathbb{S}_{\H}^{p},\forall p\geq1$
 \end{enumerate}
 \end{exampleblock}
@@ -571,7 +571,7 @@ el procedimiento dos o más veces podemos obtener resultados diferentes.
 %
 \begin{frame}{False Discovery Rate}
 
-Para reducir estos inconvenientes, se pueden tomar $k>1$proyecciones
+Para reducir estos inconvenientes, se pueden tomar $k>1$ proyecciones
 aleatorias, testear $H_{0}$ bajo c.u. y combinar los \emph{p-valores}
 obtenidos de alguna forma: \uncover<+->{bootstrap (muy lenta),} \uncover<+->{Bonferroni (muy conservadora) }\uncover<+->{o \emph{false discovery rate} (FDR).}
 

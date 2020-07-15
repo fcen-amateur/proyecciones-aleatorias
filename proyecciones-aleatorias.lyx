@@ -17,6 +17,7 @@
 
 %\setbeamercovered{transparent}
 \end_preamble
+\options handout
 \use_default_options false
 \begin_modules
 knitr
@@ -322,7 +323,7 @@ setbeameroption{show notes}
 
 
 \backslash
-setbeamertemplate{section in toc}[sections numbered] 
+setbeamertemplate{section in toc}[sections numbered]
 \end_layout
 
 \end_inset
@@ -1708,7 +1709,7 @@ status open
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset Formula $\mathbb{E}\left[Y-\left\langle X,\beta\right\rangle |X=x\right]=0$
+\begin_inset Formula $\mathbb{E}\left[Y-\left\langle X,\beta\right\rangle |\left\langle X,\gamma\right\rangle =u\right]=0$
 \end_inset
 
  p.c.t.
@@ -2309,7 +2310,7 @@ Para reducir estos inconvenientes, se pueden tomar
 \begin_inset Formula $k>1$
 \end_inset
 
-proyecciones aleatorias, testear 
+ proyecciones aleatorias, testear 
 \begin_inset Formula $H_{0}$
 \end_inset
 
